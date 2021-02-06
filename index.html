@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title> Your Moment </title>
+  <meta charset="utf-8" />
+  <link rel="stylesheet" href="index.css">
+  <script src="https://kit.fontawesome.com/b85fd553ce.js" crossorigin="anonymous"></script>
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+  <div class="wrapMain">
+    <!-- CLOCK -->
+    <div class="wrapClock">
+      <span class="js-date">ddd</span>
+      <div class="clock">
+        <!-- Clock or stopwatch
+        <i class="far fa-clock"></i>
+        <i class="fas fa-stopwatch"></i>
+        -->
+        <div class="time">00:00</div>
+        <div class="containerIcon">
+          <i class="settingsIcon fas fa-ellipsis-h">
+            <span class="settings">
+              <label><input type="checkbox" id="check_24" checked>24-hour clock</label>
+              <label><input type="checkbox" id="check_sec">display seconds</label>
+            </span>
+          </i>
+        </div>
+      </div>
+    </div>
+
+    <!-- Get Name from Form-->
+    <form class="name js-name">
+      <input type="text" placeholder="What is your name?" maxlength=20 />
+    </form>
+
+    <!-- Greetings -->
+    <div class="containerGreetings">
+      <span class="js-greetings greetings">HELLO,&nbsp;</span>
+      <span class="yourName">SB</span>
+      <span class="wiseQuote">ㅇㅇ</span>
+      <div class="containerIcon">
+        <i class="settingsIcon fas fa-ellipsis-h">
+          <div class="settings">
+            <button type="button" id="js-changeName">Change Your Name</button>
+            <button type="button" id="js-wise">Show Wise Saying</button>
+          </div>
+        </i>
+      </div>
+    </div>
+
+    <!-- ask TO DO Form-->
+    <form class="js-toDoForm">
+      <input type="text" placeholder="Write a to do" />
+    </form>
+
+  </div>
+
+
+  <!-- TO DO LIST -->
+  <div class="wrapToDo">
+    <div class="containerToDoList">
+      <div class="today"></div>
+      <form class="js-toDoForm2">
+        <input type="text" placeholder="Write a to do" />
+      </form>
+      <div class="title">Your To DO List</div>
+      <div class="containerToDo">
+        <ul class="js-toDoList">
+      </div>
+      <div class="title">Complete To DO</div>
+      <div class="containerDone">
+        <ul class="js-DoneList"></ul>
+      </div>
+      <div class="delete">
+        <!-- 몇 퍼센트 달성했는지 만들기 
+          <span>50% Completed</span>
+        -->
+        <span>Delete</span>
+        <button type="button" id="deleteAll">All</button>
+        <button type="button" id="deleteDone">Done</button>
+      </div>
+    </div>
+
+    <div class="toDoListIcon">
+      <i class="fas fa-clipboard-list"></i>
+    </div>
+
+  </div>
+
+
+
+
+  <!--- --- WEATHER ------>
+  </ul>
+  <div id="containerWeather">
+    <span class="js-currentWeather"></span>
+    <div class="containerDailyWeather">
+      <ul class="js-dailyWeather">
+        <li>
+          <span>1일</span>
+          <span>최저</span>
+          <span>최고</span>
+        </li>
+        <li>
+          <span>2일</span>
+          <span>최저</span>
+          <span>최고</span>
+        </li>
+        <li>
+          <span>3일</span>
+          <span>최저</span>
+          <span>최고</span>
+        </li>
+        <li>
+          <span>4일</span>
+          <span>최저</span>
+          <span>최고</span>
+        </li>
+        <li>
+          <span>5일</span>
+          <span>최저</span>
+          <span>최고</span>
+        </li>
+        <li>
+          <span>6일</span>
+          <span>최저</span>
+          <span>최고</span>
+        </li>
+        <li>
+          <span>7일</span>
+          <span>최저</span>
+          <span>최고</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <script src="clock.js"></script>
+  <script src="gretting.js"></script>
+  <script src="bg.js"></script>
+  <script src="weather.js"></script>
+  <script src="settingIcon.js"></script>
+  <script src="todo.js"></script>
+  <script src="controlToDo.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,460 @@
+:root{
+    --font-size-time : 16vmin;
+    --font-size-greeting : 6vmin;
+    --font-size-askToDo : 4vmin;
+    --font-size-weather : 2vmin;
+
+    --font-color : white;
+    --color-tooltip-background : rgba(11,11,11,0.7);
+    --color-settingIcon : rgba(55,55,55,0.7);
+}
+
+
+html, body{
+    margin : 0;
+    padding :0;
+    font-family: 'Noto Sans KR', sans-serif;
+}
+
+div{
+    cursor :default;
+
+}
+
+
+
+/* setting w.hover */
+.containerIcon{
+    visibility : hidden;
+    margin-left: 15px;
+    cursor : pointer;
+    width : 30px;
+    height : 30px;
+    border-radius : 50%;
+    text-align : center;
+    vertical-align : middle;
+    position: relative;
+
+    display : flex;
+    align-items : center;
+    justify-content : center;
+    z-index : 10;
+}
+
+.clock:hover .containerIcon,
+.containerGreetings:hover .containerIcon{
+    visibility : visible;
+}
+
+.containerIcon:hover{
+    background-color : var(--color-settingIcon);    
+}
+  
+  /* Tooltip text */
+.containerIcon .settings {
+    visibility: hidden;
+    width: 150px;
+    background-color: var(--color-tooltip-background);
+    color: #fff;
+    text-align: center;
+    padding: 5px 0;
+    border-radius: 6px;
+  
+    /* Position the tooltip text */
+    position: absolute;
+    z-index: 1;
+    top: 125%;  /* 여기를 top, bottom으로 고치면 위아래 바뀜 */
+    left: 150%; /*여기는 좌우 조절*/
+    margin-left: -60px;
+  
+    /* Fade in tooltip */
+    opacity: 0;
+    transition: opacity 0.5s;
+  }
+
+  
+  /* Tooltip arrow */
+.containerIcon .settings::after {
+    content: "";
+    position: absolute;
+    bottom: 100%;
+    left: 20%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color:  transparent transparent #555 transparent;
+  }
+  
+  /* Show the tooltip text when you mouse over the tooltip container */
+  /*replace JavaScript Click event
+.containerIcon:hover .settings {
+    visibility: visible;
+    opacity: 1;
+  }
+*/
+
+
+.wrapMain{
+    display : flex;
+    flex-direction: column;
+    align-items: center;
+    height : 100vh;
+    justify-content: center;
+    margin-right: 0;
+    transition : margin-right 1s;
+}
+.moveWrapMain{
+    margin-right: 50vw;
+}
+
+
+/***************** CLOCK : WRAP CLOCK ******************/
+.wrapClock{
+    display: flex;
+    flex-direction: column;
+    align-items : center;
+    /*
+    margin-top : calc(50vh - var(--font-size-time));
+    */
+}
+
+/***************** CLOCK : DATE ******************/
+.js-date{
+    color: var(--font-color);
+    font-size: calc(var(--font-size-weather) * 2);
+    text-align: center;
+       
+    visibility: hidden;
+    opacity: 0;    
+    margin-right : 2vw;
+    
+    transition: opacity 1s;
+}
+.wrapClock:hover .js-date{
+    visibility: visible;
+    opacity: 1;
+}
+
+
+
+/***************** CLOCK ******************/
+
+.clock{
+    display : flex;
+    align-items : center; 
+    margin-left : 45px;
+}
+.clock .time{
+    font-weight: bold;
+    color : var(--font-color);
+    font-size : var(--font-size-time);
+    
+    transition: color .5s ease-in-out;
+    line-height: calc(var(--font-size-time)*0.68);
+    height: calc(var(--font-size-time)*0.8);
+}
+.clock .time input{
+    margin-right: 10px;
+}
+.clock .settingsIcon .settings{
+    display: flex;
+    flex-direction: column;
+    align-items :flex-start;
+}
+.clock .settingsIcon .settings input{
+    margin : 0 10px;
+}
+.clock .containerIcon .settings{
+    width: 160px;
+}
+
+/* ******************* NAME ********************/
+.containerGreetings{
+    display : flex;
+    align-items : center;
+    margin-top : 25px;
+    margin-left: 45px;
+}
+.containerGreetings .greetings,
+.containerGreetings .yourName,
+.containerGreetings .wiseQuote{
+    color : var(--font-color);
+    font-size: var(--font-size-greeting);
+}
+/*
+.containerGreetings .wiseQuote{
+    width : 40vw;
+}
+*/
+.containerGreetings .containerIcon{
+    margin-left: 15px;
+}
+.containerGreetings .settings{
+    display : flex;
+    flex-direction : column;
+    align-items : center;
+}
+.containerGreetings .settings button{
+    display : block;
+    padding : 5px;
+    cursor: pointer;
+    white-space: nowrap;
+    background: transparent;
+    border: none ;
+    outline: 0;
+    color: #fff;
+}
+.containerGreetings .settings button:hover{
+    background : var(--color-settingIcon);
+}
+
+.name,
+.greetings,
+.yourName,
+.wiseQuote,
+.containerGreetings .containerIcon {
+    display : none;
+}
+
+.showing{
+    display: block;
+}
+.showingWise{
+    display : block;
+    font-size: calc(var(--font-size-greeting) * 0.5);
+}
+
+/* ******************* Form_Greeting, todo ********************/
+.js-toDoForm input[type=text] {
+    font-size: var(--font-size-askToDo);
+}
+.js-name input[type=text] {
+    font-size: var(--font-size-greeting);
+    margin-top : 20px;
+}
+input[type=text]{
+    border: none;
+    border-bottom: 2px var(--font-color) solid;
+    background: transparent;
+    color : var(--font-color);
+}
+input[type=text]::placeholder{
+    color : var(--font-color);
+}
+input[type=text]:focus{
+    outline: none;
+}
+
+/* ******************* Form ********************/
+.js-toDoForm{
+    margin-top : 40px;
+}
+
+
+/* ******************* TODOLIST ********************/
+.js-toDoList,
+.js-DoneList{
+    padding : 0;
+    margin : 0;
+    list-style: none;
+}
+.containerToDoList li{
+    display : flex;
+    align-items : baseline;
+    flex-wrap: nowrap;
+    /*border : 1px solid yellow;*/
+    position : relative;
+}
+.containerToDoList li .fa-circle,
+.containerToDoList li .fa-check-circle{
+    flex : none;
+}
+.containerToDoList li .fa-check-circle{
+    color : #e74c3c;
+}
+.containerToDoList li span{
+    margin-left: 8px;
+    flex : auto;
+
+    text-overflow: ellipsis;
+    overflow : hidden;
+    white-space : nowrap;
+}
+.containerToDoList .js-DoneList .strike{
+    height : 2px;
+    width : calc(100% - 70px);
+    margin-left: 32px;
+    position : absolute;
+    top : 50%;
+    background-color: #e74c3c;
+    
+}
+
+
+.containerToDoList li .fa-times{
+    flex : none;
+    margin-left : auto;
+}
+
+.wrapToDo{
+    position : absolute;
+    width : 25vw;
+    height : 100vh;
+    right: 0;
+    top:0;
+    z-index:2;
+    background-color: rgba(0,0,0,0);
+}
+
+
+.containerToDoList{
+    width : 20vw;
+    height : 80vh;
+    position : absolute;
+    right : 5vw;
+    top : 50%;
+    margin-top: -40vh;
+    background-color : rgba(0,0,0,0.7);
+    font-size: calc(var(--font-size-askToDo) * 0.7);
+    color : var(--font-color);
+    display : flex;
+    flex-direction: column;    
+    justify-content : space-between;
+    padding: 8px;
+
+    opacity : 0;
+    transition : opacity 0.7s, width 1s;
+
+}
+.containerToDoList input[type=text] {
+    font-size: calc(var(--font-size-askToDo) * 0.7);
+    width : calc(100% - 16px);
+}
+.containerToDoList .title{
+    text-align: center;
+    font-weight: bold;
+}
+
+
+.containerToDoList .containerToDo,
+.containerToDoList .containerDone{
+    width : 100%;
+    height : 30vh;
+    /*border : 1px solid red;*/
+    overflow :auto;
+}
+.containerToDoList .delete{
+    align-self: flex-end;
+    font-size: calc(var(--font-size-askToDo) * 0.5);
+}
+.containerToDoList .delete button{
+    font-size: calc(var(--font-size-askToDo) * 0.5);
+}
+
+
+.toDoListIcon{
+    color : var(--font-color);
+    font-size : var(--font-size-greeting);
+    position : absolute;
+    right : 1vw;
+    Top : 50%;
+    transform :translateY(-50%);
+    opacity : 1;
+    transition: opacity 1s;
+
+}
+
+
+.showToDoIcon{
+    opacity : 0.4;
+}
+
+.showList{
+    opacity : 1;
+    
+}
+
+.wideToDo{
+    width : 40vw;
+}
+
+
+/* ******************* WEATHER ********************/
+#containerWeather{
+    position : absolute;
+    top : 10px;
+    left : 20px;
+    color : var(--font-color);
+    font-size: var(--font-size-weather);
+
+}
+
+#containerWeather ul,
+#containerWeather li{
+    list-style-type : none;
+    padding : 0;
+    margin : 5px 5px 5px 10px;
+}
+#containerWeather li{
+    font-size : calc(var(--font-size-weather) * 0.8);
+}
+
+/* Daily Weather w.hover */
+#containerWeather .containerDailyWeather{
+    visibility : hidden;
+    width: 180px;
+    border-radius : 20px;
+    background-color: var(--color-tooltip-background);
+    color : var(--text-color);
+    /* Position the tooltip text */
+    position: absolute;
+    z-index: 1;
+    top: calc(var(--font-size-weather) + 40px);  /* 여기를 top, bottom으로 고치면 위아래 바뀜 */
+    left: 0;
+    /* Fade in tooltip */
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+  /* Tooltip arrow */
+#containerWeather .containerDailyWeather::after {
+    content: "";
+    position: absolute;
+    bottom: 100%; 
+    left: 15%;
+    margin-left: -5px;
+    border-width: 10px;
+    border-style: solid;
+    border-color:  transparent transparent var(--color-tooltip-background) transparent;
+  }
+  
+ /* Show the tooltip text when you mouse over the tooltip container */
+#containerWeather:hover .containerDailyWeather{
+    visibility : visible;
+    opacity: 1;
+}
+
+
+
+
+
+
+
+
+@keyframes fadeIn{
+    from{
+        opacity: 0;
+    } to{
+        opacity: 1;
+    }
+}
+.bgImage{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index :-1;
+    animation: fadeIn 1s linear;
+}
+
