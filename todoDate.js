@@ -91,13 +91,16 @@ function getNextDate() {
     showDate(tempSelDate.getMonth(), tempSelDate.getDate());
 }
 function showToday() {
-    console.log("show Today");
     tempSelDate.setFullYear(today.getFullYear(), today.getMonth(), today.getDate());
     showDate(today.getMonth(), today.getDate());
 }
 function showDate(month, date) {
     selDate.innerText = `${month < 9 ? `0${month + 1}` : month + 1}.${date < 10 ? `0${date}` : date}`;
-    todoTargetDate2.value = tempSelDate.toISOString().substring(0, 10);
+    tY = tempSelDate.getFullYear();
+    tM = tempSelDate.getMonth() < 9 ? `0${tempSelDate.getMonth()+1}` : tempSelDate.getMonth();
+    tD = tempSelDate.getDate() < 10 ? `0${tempSelDate.getDate()}` : tempSelDate.getDate();
+
+    todoTargetDate2.value = `${tY}-${tM}-${tD}`;
     paintToDoDependDate();
 }
 
