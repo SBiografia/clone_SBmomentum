@@ -343,14 +343,53 @@ input[type=text]:focus{
     /*border : 1px solid red;*/
     overflow :auto;
 }
-.containerToDoList .delete,
 .containerToDoList .containerAllCompleted{
+    width : 100%;
     align-self: flex-end;
     font-size: calc(var(--font-size-askToDo) * 0.5);
+    display : flex;
+    justify-content : flex-end;
 }
-.containerToDoList button{
-    width : 20vw;
+
+.containerToDoList .bottom{
+    width : 100%;
+    align-self: flex-end;
     font-size: calc(var(--font-size-askToDo) * 0.5);
+    display : flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+.containerToDoList .bottom .progressPercentMax{
+    background: rgba(255,255,255,0.1);
+    justify-content: flex-start;
+    height : 29px;
+    border-radius: 100px;
+    align-items: center;
+    padding: 0;
+    display: flex;
+    width: 40%;
+}
+.containerToDoList .bottom .progressPercentCurrent{
+    
+    box-shadow: 0 10px 40px -10px #fff;
+    border-radius: 100px;
+    text-align: center;
+    background: #fff;
+    height: 28px;
+    width: 10%;
+    transition: width;
+    transition-duration: 1s;
+    transition-timing-function: cubic-bezier(.36,.55,.63,.48);
+    color : black;
+}
+
+.containerToDoList button{
+    height: 28px;
+    width : 40%;
+    font-size: calc(var(--font-size-askToDo) * 0.5);
+    margin-left: 0;
 }
 
 
@@ -375,7 +414,6 @@ input[type=text]:focus{
     opacity : 1;
     
 }
-
 .wideToDo{
     width : 40vw;
 }

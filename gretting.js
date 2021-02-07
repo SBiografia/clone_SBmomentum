@@ -99,6 +99,7 @@ function showWise(){
         wiseQuote.classList.add(SHOWINGWISE_CN);
         let ranNum = Math.floor(Math.random() * 5);
         wiseQuote.innerText = quoteList[ranNum];
+        btn_wise.innerText = "Show Name";
         console.dir(wiseQuote);
         console.log(wiseQuote.offsetWidth, wiseQuote.offsetHeight, wiseQuote.style.fontSize);
         
@@ -108,6 +109,7 @@ function showWise(){
     }
     else if(wiseQuote.classList.contains(SHOWINGWISE_CN)){
         wiseQuote.classList.remove(SHOWINGWISE_CN);
+        btn_wise.innerText = "Show Quote";
         loadName();
     }
 

@@ -46,8 +46,8 @@
       <div class="containerIcon">
         <i class="settingsIcon fas fa-ellipsis-h">
           <div class="settings">
-            <button type="button" id="js-changeName">Change Your Name</button>
-            <button type="button" id="js-wise">Show Wise Saying</button>
+            <button type="button" id="js-changeName">Change Name</button>
+            <button type="button" id="js-wise">Show Quote</button>
           </div>
         </i>
       </div>
@@ -68,25 +68,33 @@
       <form class="js-toDoForm2">
         <input type="text" placeholder="Write a to do" />
       </form>
-      <div class="title">Your To DO List</div>
+      <div class="title">
+        <span>Your To Do List</span>
+        <span class="numOfToDo">0</span>
+      </div>
       <div class="containerToDo">
         <ul class="js-toDoList">
       </div>
         <div class="containerAllCompleted">
           <button type="button" id="allCompleted">All Completed</button>
         </div>
-      <div class="title">Complete To DO</div>
+      <div class="title">
+        <span>Complete To Do</span>
+        <span class="numOfDone">0</span>
+      </div>
       <div class="containerDone">
         <ul class="js-DoneList"></ul>
       </div>
-      <div class="delete">
-        <!-- 몇 퍼센트 달성했는지 만들기 
-          <span>50% Completed</span>
-        -->
-<!-- delete all 버튼은 위험하니 없애는 걸로 ㅋㅋㅋ
+      <div class="bottom">
+        
+        <div class="progressPercentMax">
+          <div class="progressPercentCurrent">50%</div>
+        </div>
+
+        <!-- delete all 버튼은 위험하니 없애는 걸로 ㅋㅋㅋ
         <button type="button" id="deleteAll">All</button>
--->
-        <button type="button" id="deleteDone">Delete All Completed</button>
+        -->
+        <button type="button" id="deleteDone">Clear</button>
       </div>
     </div>
 
