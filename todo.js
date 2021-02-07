@@ -162,21 +162,35 @@ function paintToDo(text, listName){
 
 }
 
+function handleBlank(e){
+    console.log("enter handleBlank")
+    e.target.classList.toggle("applyShake");
+}
+
 function handleSubmit(event){
-    
     event.preventDefault(); //기존에 submit 하면 하는 이벤트 없애주고 submit 하면 새로고침을 해버려서..
     const eClassName = event.target.className;
 
     if(eClassName === "js-toDoForm"){
+        //공백을 입력하면 입력 안되게 막음. 그리고 효과주기
         const currentValue = toDoInput.value; 
-        //console.log(toDoList);
-        paintToDo(currentValue, toDoList.className);
-        toDoInput.value = "";
+        if(currentValue === ""){
+            handleBlank(event);
+        } 
+        else{
+            paintToDo(currentValue, toDoList.className);
+            toDoInput.value = "";   
+        }
     }
     else if(eClassName === "js-toDoForm2"){
         const currentValue = toDoInput2.value; 
-        paintToDo(currentValue, toDoList.className);
-        toDoInput2.value = "";
+        if(currentValue === ""){
+            handleBlank(event);
+        } 
+        else {
+            paintToDo(currentValue, toDoList.className);
+            toDoInput2.value = "";
+        }
     }
 }
 
@@ -240,6 +254,8 @@ function init(){
     loadToDos();
     toDoForm.addEventListener("submit",handleSubmit);
     toDoForm2.addEventListener("submit",handleSubmit);
+   toDoForm.addEventListener("animationend", handleBlank);
+   toDoForm2.addEventListener("animationend", handleBlank);
     //deleteAll button is risky
     //btn_deleteAll.addEventListener("click",deleteAll);
     btn_deleteDone.addEventListener("click",deleteAllDone);
