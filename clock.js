@@ -15,8 +15,9 @@ function getTime(){
     const hours = date.getHours();
     const seconds = date.getSeconds();
 
-    clockDate.innerText = `${date.getFullYear()}. ${date.getMonth()}. ${date.getDate()}`;
-
+    clockDate.innerText = `${date.getFullYear()}. ${date.getMonth()+1}. ${date.getDate()}`;
+    
+    
     if(chk24.checked && chkSec.checked){
         //24시간표시 + 초 표시
         clockTitle.innerText = `${hours<10 ? `0${hours}`:hours}:${

@@ -343,11 +343,13 @@ input[type=text]:focus{
     /*border : 1px solid red;*/
     overflow :auto;
 }
-.containerToDoList .delete{
+.containerToDoList .delete,
+.containerToDoList .containerAllCompleted{
     align-self: flex-end;
     font-size: calc(var(--font-size-askToDo) * 0.5);
 }
-.containerToDoList .delete button{
+.containerToDoList button{
+    width : 20vw;
     font-size: calc(var(--font-size-askToDo) * 0.5);
 }
 
@@ -402,7 +404,7 @@ input[type=text]:focus{
 /* Daily Weather w.hover */
 #containerWeather .containerDailyWeather{
     visibility : hidden;
-    width: 180px;
+    width: 20vw;
     border-radius : 20px;
     background-color: var(--color-tooltip-background);
     color : var(--text-color);

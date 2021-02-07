@@ -5,7 +5,8 @@ const toDoForm = document.querySelector(".js-toDoForm")
     toDoList = document.querySelector(".js-toDoList"),
     doneList = document.querySelector(".js-DoneList");
 const btn_deleteAll = document.querySelector("#deleteAll"),
-    btn_deleteDone = document.querySelector("#deleteDone");
+    btn_deleteDone = document.querySelector("#deleteDone"),
+    btn_allCompleted = document.querySelector("#allCompleted");
 
 const TODOS_LS = "toDoList";
 const DONE_LS = "doneList";
@@ -188,13 +189,23 @@ function deleteAll(){
     deleteAllTodo();
 }
 
+function AllCompleted(){
+    for(let i=0; i<toDos.length ;i++){
+        paintToDo(toDos[i].text,"js-DoneList");
+    }
+
+    deleteAllTodo();
+}
+
 function init(){
     
     loadToDos();
     toDoForm.addEventListener("submit",handleSubmit);
     toDoForm2.addEventListener("submit",handleSubmit);
-    btn_deleteAll.addEventListener("click",deleteAll);
+    //deleteAll button is risky
+    //btn_deleteAll.addEventListener("click",deleteAll);
     btn_deleteDone.addEventListener("click",deleteAllDone);
+    btn_allCompleted.addEventListener("click",AllCompleted);
 
 }
 init();
