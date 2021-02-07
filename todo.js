@@ -113,6 +113,31 @@ function saveToDos(listName) {
         localStorage.setItem(DONE_LS, JSON.stringify(dones)); //이건 JS의 object를 string으로 바꿔줌.
     }
 }
+//수정하는거 진행하는 중 **********************************
+function saveChangeTarget(){
+
+}
+function tryToPreventNewLines(event) {
+    switch (e.keyCode) {
+        case 13:
+            event.target.blur();
+            e.preventDefault();
+            event.target.contentEditable = "false";
+            //saveName(yourName.innerText);
+            return false;
+    }
+    return true;
+}
+
+function changeTarget(event){
+    console.dir(event.target);
+    event.target.contentEditable = "true";
+    event.target.focus();
+
+    event.target.addEventListener('keydown', tryToPreventNewLines);
+    event.target.addEventListener('change', tryToPreventNewLines);
+
+}
 
 function paintToDo(text, targetMonth, targetDate, listName) {
     //console.log(text);
@@ -137,6 +162,8 @@ function paintToDo(text, targetMonth, targetDate, listName) {
     delBtn.classList.add("fas", "fa-times");
     uncheckBtn.classList.add("far", "fa-check-circle");
     strikeLine.classList.add("strike");
+    spanTarget.classList.add("target");
+    spanTarget.addEventListener("dblclick",changeTarget);
     checkBtn.addEventListener("click", checkTodo);
     uncheckBtn.addEventListener("click", uncheckTodo);
     delBtn.addEventListener("click", deleteToDo);
@@ -147,7 +174,7 @@ function paintToDo(text, targetMonth, targetDate, listName) {
     li.id = newId;
     li.targetMonth = targetMonth;
     li.targetDate = targetDate;
-    spanTarget.classList.add("target");
+    
 
     
 

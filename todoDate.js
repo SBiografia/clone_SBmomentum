@@ -21,10 +21,12 @@ function realPaintToDo(toDo, tempCN) {
     delBtn.classList.add("fas", "fa-times");
     uncheckBtn.classList.add("far", "fa-check-circle");
     strikeLine.classList.add("strike");
+    
     checkBtn.addEventListener("click", checkTodo);
     uncheckBtn.addEventListener("click", uncheckTodo);
     delBtn.addEventListener("click", deleteToDo);
     spanTarget.classList.add("target");
+    spanTarget.addEventListener("dblclick",changeTarget);
 
     span.innerText = toDo.text;
     spanTarget.innerText = `~${toDo.targetMonth+1}/${toDo.targetDate<10 ? `0${toDo.targetDate}`:toDo.targetDate}`;
