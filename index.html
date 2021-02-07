@@ -64,9 +64,20 @@
   <!-- TO DO LIST -->
   <div class="wrapToDo">
     <div class="containerToDoList">
-      <div class="today"></div>
+
+    <div class="top">
+        <i class="far fa-calendar-alt"></i>
+        <div class="slideDate">
+          <button type="button" id="btn_pre">&lt;</button>
+          <div class="selectDate">02.08</div>            
+          <button type="button" id="btn_next">&gt;</button>
+        </div>
+        <i class="fas fa-calendar-day"></i>
+    </div>
+
       <form class="js-toDoForm2">
-        <input type="text" placeholder="Write a to do" />
+        <input type="text" id="js-text2" placeholder="Write a to do" />
+        <input type="date" id="js-todoTargetDate2" name="todoDate">
       </form>
       <div class="title">
         <span>Your To Do List</span>
@@ -88,7 +99,7 @@
       <div class="bottom">
         
         <div class="progressPercentMax">
-          <div class="progressPercentCurrent">50%</div>
+          <div class="progressPercentCurrent"></div>
         </div>
 
         <!-- delete all 버튼은 위험하니 없애는 걸로 ㅋㅋㅋ
@@ -159,6 +170,7 @@
   <script src="settingIcon.js"></script>
   <script src="todo.js"></script>
   <script src="controlToDo.js"></script>
+  <script src="todoDate.js"></script>
 
 </body>
 

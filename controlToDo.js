@@ -10,6 +10,18 @@ function moveMain(){
     wrapMain.classList.toggle("moveWrapMain");
     
 }
+function hadleTargetDate(){
+    if(!controlToDoList.classList.contains("wideToDo")){
+        todoTargetDate2.style.visibility = "hidden";
+        todoTargetDate2.style.display = "none";
+        toDoInput2.style.width = "98%";
+    }
+    else{
+        todoTargetDate2.style.visibility = "visible";
+        todoTargetDate2.style.display = "block";
+        toDoInput2.style.width = "70%";
+    }
+}
 
 function toggleClass(num){
     if(num === 0){ // 기본상태
@@ -21,15 +33,18 @@ function toggleClass(num){
         controlToDoIcon.classList.toggle("showToDoIcon");
         setTimeout(function(){toggleClass(0)},2500);
     }
-    else if(num === 2){//icon click 했을 때
+    else if(num === 2){
         if(controlToDoList.classList.contains("mouseE")){
             controlToDoList.classList.toggle("mouseE");  
             controlToDoIcon.classList.toggle("showToDoIcon");  
             controlToDoList.classList.toggle("wideToDo");
+            hadleTargetDate();            
         }
-        else{ 
+        else{
             controlToDoList.classList.toggle("wideToDo");
-            toggleClass(0); 
+            toggleClass(0);     
+            hadleTargetDate();       
+            
         }
         
     }

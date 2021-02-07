@@ -245,6 +245,8 @@ input[type=text]:focus{
     outline: none;
 }
 
+
+
 /* ******************* Form SHAKE ********************/
 @keyframes shake {
     10%, 90% {
@@ -273,6 +275,50 @@ input[type=text]:focus{
 }
 
 
+
+/* ******************* TODOLIST : DATE********************/
+.containerToDoList .top{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    position: relative;
+}
+.containerToDoList .slideDate{
+    flex : 0 0 0;
+    display: flex;
+    flex-direction: row;
+    justify-content : center;
+    align-items : center;
+    height : 30px;
+
+}
+.containerToDoList .top .fa-calendar-alt{
+    position: absolute;
+    left : 0;
+}
+.containerToDoList .top .fa-calendar-day{
+    position: absolute;
+    right : 0;
+}
+
+.containerToDoList .slideDate #btn_pre,
+.containerToDoList .slideDate #btn_next{
+    border : 1px solid gray;
+    border-radius : 50%;
+    font-size: calc(var(--font-size-askToDo) * 0.5);
+    line-height: 30px;
+    text-align : center;
+    height : 30px;
+    width : 30px;
+    cursor : pointer;
+    
+}
+.containerToDoList .slideDate .selectDate{
+    font-size: calc(var(--font-size-askToDo) * 0.5);
+    margin-left: 12px;
+    margin-right: 12px;
+    
+}
 /* ******************* TODOLIST ********************/
 .js-toDoList,
 .js-DoneList{
@@ -301,6 +347,14 @@ input[type=text]:focus{
     text-overflow: ellipsis;
     overflow : hidden;
     white-space : nowrap;
+}
+.containerToDoList li .target{
+    flex : none;
+    margin-left : auto;
+    margin-right : 15px;
+    font-size: calc(var(--font-size-askToDo) * 0.4);
+    align-self : center;
+
 }
 .containerToDoList .js-DoneList .strike{
     height : 2px;
@@ -348,9 +402,19 @@ input[type=text]:focus{
     transition : opacity 0.7s, width 1s;
 
 }
+.js-toDoForm2{
+    display : flex;
+    justify-content : space-between;
+}
 .containerToDoList input[type=text] {
     font-size: calc(var(--font-size-askToDo) * 0.7);
-    width : calc(100% - 16px);
+    width : 98%;
+}
+.containerToDoList input[type=date] {
+    visibility: hidden;
+    display : none;
+    font-size: calc(var(--font-size-askToDo) * 0.4);
+    width : 25%;
 }
 .containerToDoList .title{
     text-align: center;
@@ -400,7 +464,7 @@ input[type=text]:focus{
     text-align: center;
     background: #fff;
     height: 28px;
-    width: 10%;
+    width: 0%;
     transition: width;
     transition-duration: 1s;
     transition-timing-function: cubic-bezier(.36,.55,.63,.48);
@@ -439,6 +503,7 @@ input[type=text]:focus{
 .wideToDo{
     width : 40vw;
 }
+
 
 
 /* ******************* WEATHER ********************/
