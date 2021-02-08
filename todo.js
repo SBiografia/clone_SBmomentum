@@ -113,30 +113,37 @@ function saveToDos(listName) {
         localStorage.setItem(DONE_LS, JSON.stringify(dones)); //이건 JS의 object를 string으로 바꿔줌.
     }
 }
-//수정하는거 진행하는 중 **********************************
-function saveChangeTarget(){
 
-}
-function tryToPreventNewLines(event) {
-    switch (e.keyCode) {
-        case 13:
-            event.target.blur();
-            e.preventDefault();
-            event.target.contentEditable = "false";
-            //saveName(yourName.innerText);
-            return false;
+function saveChangeTarget(tLi, tText, tId, tM, tD){
+    console.log("saveChangeTarget", tText, tId, tM, tD);
+    const tToDoObj = { //아래는 만들어진 todo를 배열에 넣어서 기억하게 하는것.
+        text: tText,
+        id: tId,
+        targetMonth : Number(tM-1),  //temp*********************************
+        targetDate : Number(tD)    //temp*********************************
+    };
+    const parsedToDos = JSON.parse(localStorage.getItem((TODOS_LS)));
+    console.log(parsedToDos);
+    
+    for(let i=0;i < localStorage.length; i++){
+        if(parsedToDos[i].id === tId){
+            realDeleteTodo(tLi, TODOS_CN);
+            toDos.push(tToDoObj);
+            saveToDos(TODOS_CN);
+            realPaintToDo(tToDoObj, TODOS_CN);
+            paintNumOfDO(TODOS_CN);
+            return;
+        }
     }
-    return true;
 }
 
 function changeTarget(event){
-    console.dir(event.target);
+    
     event.target.contentEditable = "true";
     event.target.focus();
 
     event.target.addEventListener('keydown', tryToPreventNewLines);
     event.target.addEventListener('change', tryToPreventNewLines);
-
 }
 
 function paintToDo(text, targetMonth, targetDate, listName) {
@@ -170,7 +177,7 @@ function paintToDo(text, targetMonth, targetDate, listName) {
 
     
     span.innerText = text;
-    spanTarget.innerText = `~${targetMonth+1}/${targetDate<10 ? `0${targetDate}`:targetDate}`;
+    spanTarget.innerText = `~${targetMonth < 9 ? `0${targetMonth+1}` : targetMonth+1}/${targetDate<10 ? `0${targetDate}`:targetDate}`;
     li.id = newId;
     li.targetMonth = targetMonth;
     li.targetDate = targetDate;

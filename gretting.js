@@ -49,7 +49,7 @@ function paintGreeting(text){//currentUser key 값이 있으면 이걸 실행함
 function loadName(){
     const currentUser = localStorage.getItem(USER_LS);
     if(currentUser === null){
-        //she is not
+        //she iss not
         askForName();
     }
     else{
@@ -61,10 +61,22 @@ function loadName(){
 function tryToPreventNewLines(e) {
     switch (e.keyCode) {
         case 13:
-            yourName.blur();
+            //yourName.blur();
+            e.target.blur();
             e.preventDefault();
-            yourName.contentEditable = "false";
-            saveName(yourName.innerText);
+            //yourName.contentEditable = "false";
+            e.target.contentEditable = "false";
+            if(e.target === yourName){   
+                saveName(e.target.innerText);
+            } else{
+                
+                console.dir(e.target);
+                
+                const tM = e.target.innerText.substring(1,3);
+                const tD = e.target.innerText.substring(4,6);
+                console.log(tM,tD);
+                saveChangeTarget(e.target.parentNode,e.target.parentNode.childNodes[1].innerText, e.target.parentNode.id, tM, tD);
+            }
             return false;
     }
     return true;

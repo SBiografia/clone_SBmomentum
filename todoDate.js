@@ -29,7 +29,7 @@ function realPaintToDo(toDo, tempCN) {
     spanTarget.addEventListener("dblclick",changeTarget);
 
     span.innerText = toDo.text;
-    spanTarget.innerText = `~${toDo.targetMonth+1}/${toDo.targetDate<10 ? `0${toDo.targetDate}`:toDo.targetDate}`;
+    spanTarget.innerText = `~${toDo.targetMonth < 9 ? `0${toDo.targetMonth+1}` : toDo.targetMonth+1}/${toDo.targetDate<10 ? `0${toDo.targetDate}`:toDo.targetDate}`;
     li.id = toDo.id;
     li.targetMonth = toDo.targetMonth;
     li.targetDate = toDo.targetDate;
