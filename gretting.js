@@ -69,13 +69,10 @@ function tryToPreventNewLines(e) {
             if(e.target === yourName){   
                 saveName(e.target.innerText);
             } else{
-                
-                console.dir(e.target);
-                
+                const tCN = e.target.parentNode.parentNode.className;
                 const tM = e.target.innerText.substring(1,3);
                 const tD = e.target.innerText.substring(4,6);
-                console.log(tM,tD);
-                saveChangeTarget(e.target.parentNode,e.target.parentNode.childNodes[1].innerText, e.target.parentNode.id, tM, tD);
+                saveChangeTarget(e.target.parentNode, e.target.parentNode.id, tM, tD, tCN);
             }
             return false;
     }

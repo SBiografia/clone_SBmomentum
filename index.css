@@ -308,7 +308,7 @@ input[type=text]:focus{
 .containerToDoList .slideDate #btn_next{
     border : 1px solid gray;
     border-radius : 50%;
-    font-size: calc(var(--font-size-askToDo) * 0.5);
+    font-size: calc(var(--font-size-askToDo) * 0.6);
     line-height: 2vh;
     text-align : center;
     height : 2vh;
@@ -318,7 +318,7 @@ input[type=text]:focus{
     
 }
 .containerToDoList .slideDate .selectDate{
-    font-size: calc(var(--font-size-askToDo) * 0.5);
+    font-size: calc(var(--font-size-askToDo) * 0.6);
     margin-left: 12px;
     margin-right: 12px;
     
@@ -379,7 +379,7 @@ input[type=text]:focus{
     flex : none;
     margin-left : auto;
     margin-right : 15px;
-    font-size: calc(var(--font-size-askToDo) * 0.4);
+    font-size: calc(var(--font-size-askToDo) * 0.5);
     align-self : center;
     z-index:3;
 
