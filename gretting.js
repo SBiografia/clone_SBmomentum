@@ -59,6 +59,8 @@ function loadName(){
 
 }
 function tryToPreventNewLines(e) {
+    //console.log(e.keyCode);
+    //console.dir(e.target);
     switch (e.keyCode) {
         case 13:
             //yourName.blur();
@@ -68,11 +70,9 @@ function tryToPreventNewLines(e) {
             e.target.contentEditable = "false";
             if(e.target === yourName){   
                 saveName(e.target.innerText);
-            } else{
-                const tCN = e.target.parentNode.parentNode.className;
-                const tM = e.target.innerText.substring(1,3);
-                const tD = e.target.innerText.substring(4,6);
-                saveChangeTarget(e.target.parentNode, e.target.parentNode.id, tM, tD, tCN);
+            } 
+            else if(e.target.nodeName === "SPAN"){
+                saveToDoContent(e.target);
             }
             return false;
     }

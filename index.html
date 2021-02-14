@@ -14,14 +14,28 @@
 
   <div class="wrapMain">
     <!-- CLOCK -->
+    <!--
+    <canvas id="canvas" width="400" height="400"
+    style="background-color:#333">
+    </canvas>
+    -->
     <div class="wrapClock">
       <span class="js-date">ddd</span>
       <div class="clock">
-        <!-- Clock or stopwatch
-        <i class="far fa-clock"></i>
-        <i class="fas fa-stopwatch"></i>
-        -->
-        <div class="time">00:00</div>
+        <i class="far fa-clock clockTypeIcon">
+          <div class="clockTypeList">
+            <i class="far fa-clock">
+              <span class="tooltipClockType">Clock</span>
+            </i>
+            <i class="fas fa-stopwatch">
+              <span class="tooltipClockType">Stopwatch</span>
+            </i>
+          </div>
+        </i>
+        <div class="timeOrstopwatch">
+          <div class="time">00:00</div>
+          <div class="stopwatch"></div>
+        </div>
         <div class="containerIcon">
           <i class="settingsIcon fas fa-ellipsis-h">
             <span class="settings">
@@ -164,6 +178,7 @@
   </div>
 
   <script src="clock.js"></script>
+  
   <script src="gretting.js"></script>
   <script src="bg.js"></script>
   <script src="weather.js"></script>
@@ -172,7 +187,7 @@
   
   <script src="controlToDo.js"></script>
 
-  
+  <!-- <script src="stopwatch.js"></script> -->
 
 </body>
 

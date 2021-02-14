@@ -35,44 +35,56 @@ let tempDoneArr = [];
 const today = new Date();
 let tempSelDate = new Date();
 
-function saveChangeTarget(tLi, tId, tM, tD, tempCN) {
-    const parsedToDos = JSON.parse(localStorage.getItem((TODOS_LS)));
-
-
-    for (let i = 0; i < localStorage.length; i++) {
-        if (parsedToDos[i].id === tId) {
-            if(tempCN === TODOS_CN){
-                toDoListScreen.removeChild(tLi);
-            }
-            else if(tempCN === DONE_CN){
-                doneListScreen.removeChild(tLi);
-            }
-
-            parsedToDos[i].targetMonth = Number(tM - 1);
-            parsedToDos[i].targetDate = Number(tD);    
-            
-            console.log("parse[i] is", i, parsedToDos[i]);
-            
-            tempToDoArr = parsedToDos;
-            saveToDo_LS(tempCN);  //이거는 parsedToDos.parent 로 CN확인
-            if(parsedToDos[i].targetDate >= tempSelDate.getDate()){
-                printToDo(parsedToDos[i], tempCN, 4);    
-            }
-            
-            
-
-            return;
+function checkOverdue(targetToDo) {
+    // tm1:td1 이 todo의 날짜, tm2.td2 가 리스트에 표시중인 날짜
+    // true는 기한 전, false는 기한 지난거
+    if (targetToDo.targetMonth < tempSelDate.getMonth()) {
+        return false;
+    }
+    else if (targetToDo.targetMonth > tempSelDate.getMonth()) {
+        return true;
+    }
+    else {
+        if (targetToDo.targetDate < tempSelDate.getDate()) {
+            return false;
+        }
+        else {
+            return true;
         }
     }
 }
 
-function changeTarget(event) {
 
-    event.target.contentEditable = "true";
-    event.target.focus();
+function saveTargetDate(event) {
+    const changedTargetDate_String = event.target.value;
+    const changedMonth = changedTargetDate_String.substring(5, 7);
+    const changedDate = changedTargetDate_String.substring(8, 10);
+    const parentLi = event.target.parentNode.parentNode;
 
-    event.target.addEventListener('keydown', tryToPreventNewLines);
-    event.target.addEventListener('change', tryToPreventNewLines);
+    const parsedToDos = JSON.parse(localStorage.getItem((TODOS_LS)));
+
+    console.log(`month is ${changedMonth}, date is ${changedDate}`);
+    console.log(event.target.parentNode.parentNode.id);
+
+    for (let i = 0; i < parsedToDos.length; i++) {
+        console.log(parsedToDos[i].id, parentLi.id);
+        if (parsedToDos[i].id === parentLi.id) {
+            console.log("enter same id");
+            toDoListScreen.removeChild(parentLi);
+            parsedToDos[i].targetMonth = Number(changedMonth - 1);
+            parsedToDos[i].targetDate = Number(changedDate);
+
+            tempToDoArr = parsedToDos;
+            saveToDo_LS(TODOS_CN);
+            if (checkOverdue(parsedToDos[i])) {
+                printToDo(parsedToDos[i], TODOS_CN, 4);
+            }
+            else if (!checkOverdue(parsedToDos[i])) {
+                printToDo(parsedToDos[i], TODOS_CN, 5);
+            }
+            return;
+        }
+    }
 }
 
 
@@ -112,21 +124,33 @@ function printToDo(tToDo, tempCN, printType) {
     const checkBtn = document.createElement("i");
     const uncheckBtn = document.createElement("i");
     const delBtn = document.createElement("i");
-    const span = document.createElement("span");
+    const span = document.createElement("span"); //내용
+
+    const targetWrap = document.createElement("label");
+    const eachToDoTarget = document.createElement("input");
     const spanTarget = document.createElement("span");
+
     const strikeLine = document.createElement("div");
+
 
     checkBtn.classList.add("far", "fa-circle");
     delBtn.classList.add("fas", "fa-times");
     uncheckBtn.classList.add("far", "fa-check-circle");
     strikeLine.classList.add("strike");
+
+    targetWrap.classList.add("targetWrap");
     spanTarget.classList.add("target");
+    eachToDoTarget.type = "date";
+    targetWrap.appendChild(eachToDoTarget);
+    targetWrap.appendChild(spanTarget);
 
     checkBtn.addEventListener("click", checkTodo);
     uncheckBtn.addEventListener("click", uncheckTodo);
     delBtn.addEventListener("click", handleDelete);
+    span.addEventListener("dblclick",changeToDoContent)
     spanTarget.classList.add("target");
-    spanTarget.addEventListener("dblclick", changeTarget);
+    eachToDoTarget.addEventListener("change", saveTargetDate);
+    //spanTarget.addEventListener("dblclick", changeTarget);
 
     span.innerText = tToDo.text;
     spanTarget.innerText = `~${tToDo.targetMonth < 9 ? `0${tToDo.targetMonth + 1}` : tToDo.targetMonth + 1}/${tToDo.targetDate < 10 ? `0${tToDo.targetDate}` : tToDo.targetDate}`;
@@ -134,11 +158,14 @@ function printToDo(tToDo, tempCN, printType) {
     li.targetMonth = tToDo.targetMonth;
     li.targetDate = tToDo.targetDate;
 
+    if (printType === 5) {
+        li.classList.add("overdueToDo");
+    }
 
     if (tempCN === TODOS_CN) {
         li.appendChild(checkBtn);
         li.appendChild(span); //li에다가 span과 
-        li.appendChild(spanTarget);
+        li.appendChild(targetWrap);
         li.appendChild(delBtn); //del 버튼을 넣어줬음
         toDoListScreen.appendChild(li); //appendChild는 특정 요소를 부모한테 넣는걸 말함.
 
@@ -152,7 +179,7 @@ function printToDo(tToDo, tempCN, printType) {
         doneListScreen.appendChild(li); //appendChild는 특정 요소를 부모한테 넣는걸 말함.
     }
 
-    
+
     switch (printType) {
         //printType 1=처음 등록, 2=첫화면띄울때 3=체크/언체크 4=날짜변경할 때
         case 1: //처음 todo 등록할 때 
@@ -173,10 +200,80 @@ function printToDo(tToDo, tempCN, printType) {
             paintNumOfDO(TODOS_CN);
             paintNumOfDO(DONE_CN);
             break;
+        case 5: //todo에서 시산이 지난 toDo는 빨간색칠하기.
+            paintNumOfDO(TODOS_CN);
+            paintNumOfDO(DONE_CN);
+            break;
     }
 
-    
+
 }
+/******** 더블클릭으로 ToDo 내용 변경 *****/
+function changeToDoContent(event){
+    //console.dir(event.target);
+    if(event.target.parentNode.parentNode.className === DONE_CN){
+        return;
+    }
+    const targetToDoContent = event.target;
+    targetToDoContent.contentEditable = "true";
+
+    var range = document.createRange();  
+    range.selectNodeContents(targetToDoContent);
+    range.collapse(false);
+    var sel = window.getSelection();
+    sel.removeAllRanges();
+    sel.addRange(range);
+
+    targetToDoContent.focus();
+
+    targetToDoContent.addEventListener('keydown', tryToPreventNewLines);
+    targetToDoContent.addEventListener('change', tryToPreventNewLines);
+}
+
+function saveToDoContent(targetSpan){
+    const changedText = targetSpan.innerText;
+    const parentLi = targetSpan.parentNode;
+    const parsedToDos = JSON.parse(localStorage.getItem((TODOS_LS)));
+
+    for (let i = 0; i < parsedToDos.length; i++) {
+        if (parsedToDos[i].id === parentLi.id) {
+            parsedToDos[i].text = changedText;
+            tempToDoArr = parsedToDos;
+            saveToDo_LS(TODOS_CN);
+            return;
+        }
+    }
+}
+
+    /*
+const parentLi = event.target.parentNode.parentNode;
+
+    const parsedToDos = JSON.parse(localStorage.getItem((TODOS_LS)));
+
+    console.log(`month is ${changedMonth}, date is ${changedDate}`);
+    console.log(event.target.parentNode.parentNode.id);
+
+    for (let i = 0; i < parsedToDos.length; i++) {
+        console.log(parsedToDos[i].id, parentLi.id);
+        if (parsedToDos[i].id === parentLi.id) {
+            console.log("enter same id");
+            toDoListScreen.removeChild(parentLi);
+            parsedToDos[i].targetMonth = Number(changedMonth - 1);
+            parsedToDos[i].targetDate = Number(changedDate);
+
+            tempToDoArr = parsedToDos;
+            saveToDo_LS(TODOS_CN);
+            if (checkOverdue(parsedToDos[i])) {
+                printToDo(parsedToDos[i], TODOS_CN, 4);
+            }
+            else if (!checkOverdue(parsedToDos[i])) {
+                printToDo(parsedToDos[i], TODOS_CN, 5);
+            }
+            return;
+        }
+    }
+    */
+
 
 /***********************DELETE  와 관련된 함수들************** */
 
@@ -184,7 +281,7 @@ function handleDelete(event) {
     const btn = event.target,
         li = btn.parentNode,
         tempCN = event.path[2].className;
-        deleteToDo(li, tempCN);
+    deleteToDo(li, tempCN);
 }
 
 function deleteToDo(li, tempCN) {
@@ -222,7 +319,7 @@ function deleteToDo(li, tempCN) {
 function pushArr(tToDo, tempCN) {
     if (tempCN === TODOS_CN) {
         tempToDoArr.push(tToDo);
-        
+
     }
     else if (tempCN === DONE_CN) {
         tempDoneArr.push(tToDo);
@@ -307,10 +404,10 @@ function handleSubmit(event) {
     const eClassName = event.target.className;
     if (eClassName === "js-toDoForm") {
         const toDoObj = {
-            text : toDoInput.value,
-            id : getNewID(),
-            targetMonth : today.getMonth(),
-            targetDate : today.getDate()
+            text: toDoInput.value,
+            id: getNewID(),
+            targetMonth: today.getMonth(),
+            targetDate: today.getDate()
         };
 
         if (toDoObj.text === "") {
@@ -323,13 +420,13 @@ function handleSubmit(event) {
         }
     }
     else if (eClassName === "js-toDoForm2") {
-        
+
         const tDate = new Date(todoTargetDate2.value);
         const toDoObj = {
-            text : toDoInput2.value,
-            id : getNewID(),
-            targetMonth : tDate.getMonth(),
-            targetDate : tDate.getDate()
+            text: toDoInput2.value,
+            id: getNewID(),
+            targetMonth: tDate.getMonth(),
+            targetDate: tDate.getDate()
         };
 
         if (toDoObj.text === "") {
@@ -369,7 +466,7 @@ function deleteAll() {
 
 function AllCompleted() {
     for (let i = 0; i < tempToDoArr.length; i++) {
-        printToDo(tempToDoArr[i],DONE_CN, 3);
+        printToDo(tempToDoArr[i], DONE_CN, 3);
     }
     deleteAllTodo();
 }
@@ -400,15 +497,25 @@ function showDate(month, date) {
     tD = tempSelDate.getDate() < 10 ? `0${tempSelDate.getDate()}` : tempSelDate.getDate();
 
     todoTargetDate2.value = `${tY}-${tM}-${tD}`;
+    //paintToDoDependDate();
     paintToDoDependDate();
 }
+
 function paintToDoDependDate() {
     const updatedToDos = tempToDoArr.filter(function (toDo) {
-        return toDo.targetDate >= tempSelDate.getDate();
+        //return toDo.targetDate >= tempSelDate.getDate();
+        return checkOverdue(toDo, tempSelDate);
     });
     const updatedDones = tempDoneArr.filter(function (toDo) {
-        return toDo.targetDate >= tempSelDate.getDate();
+        //return toDo.targetDate >= tempSelDate.getDate();
+        return checkOverdue(toDo, tempSelDate);
     });
+    const overdueToDos = tempToDoArr.filter(function (toDo) {
+        return !checkOverdue(toDo, tempSelDate);
+        //toDo.targetDate < tempSelDate.getDate();
+    });
+
+
     toDoListScreen.innerHTML = "";
     doneListScreen.innerHTML = "";
     if (updatedToDos !== null) {
@@ -416,14 +523,16 @@ function paintToDoDependDate() {
             printToDo(toDo, TODOS_CN, 4);
         });
     }
-    if(updatedDones !== null){
+    if (overdueToDos !== null) {
+        overdueToDos.forEach(function (toDo) {
+            printToDo(toDo, TODOS_CN, 5);
+        });
+    }
+    if (updatedDones !== null) {
         updatedDones.forEach(function (toDo) {
             printToDo(toDo, DONE_CN, 4);
         });
     }
-    paintNumOfDO(TODOS_CN);
-    paintNumOfDO(DONE_CN);
-
 }
 
 
