@@ -11,7 +11,7 @@
 </head>
 
 <body>
-
+  <!-- <div class="centerTest"></div> -->
   <div class="wrapMain">
     <!-- CLOCK -->
     <!--
@@ -21,6 +21,15 @@
     -->
     <div class="wrapClock">
       <span class="js-date">ddd</span>
+      <div class="timerIcons">
+        <div class="oneIcon">
+        <i class="far fa-play-circle js-play"></i>
+      </div>
+      <div class="twoIcons">
+        <i class="far fa-pause-circle js-pause"></i>
+        <i class="far fa-stop-circle js-stop"></i>
+      </div>
+      </div>
       <div class="clock">
         <i class="far fa-clock clockTypeIcon">
           <div class="clockTypeList">
@@ -28,15 +37,15 @@
               <span class="tooltipClockType">Clock</span>
             </i>
             <i class="fas fa-stopwatch">
-              <span class="tooltipClockType">Stopwatch</span>
+              <span class="tooltipClockType">Timer</span>
             </i>
           </div>
         </i>
         <div class="timeOrstopwatch">
           <div class="time">00:00</div>
-          <div class="stopwatch"></div>
+          <div class="stopwatch">01:00</div>
         </div>
-        <div class="containerIcon">
+        <div class="clockContainerIcon">
           <i class="settingsIcon fas fa-ellipsis-h">
             <span class="settings">
               <label><input type="checkbox" id="check_24" checked>24-hour clock</label>
@@ -177,12 +186,13 @@
     </div>
   </div>
 
+  <script src="settingIcon.js"></script>
   <script src="clock.js"></script>
   
   <script src="gretting.js"></script>
   <script src="bg.js"></script>
   <script src="weather.js"></script>
-  <script src="settingIcon.js"></script>
+  
   <script src="todoCombine.js"></script>
   
   <script src="controlToDo.js"></script>

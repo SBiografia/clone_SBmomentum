@@ -21,19 +21,23 @@ div{
     cursor :default;
 
 }
-/**** CLOCK   */
-
-
-
-/**** CLOCK   */
+.centerTest{
+    background : rgba(255,0,0,0.5);
+    z-index : -1;
+    position : absolute;
+    height : 100%;
+    width : 50%;
+    left : 0;
+    
+}
 
 /* setting w.hover */
 .containerIcon{
     visibility : hidden;
-    margin-left: 15px;
+    margin-left: calc(var(--font-size-time) * 0.1);;
     cursor : pointer;
-    width : 30px;
-    height : 30px;
+    width : calc(var(--font-size-time) * 0.3);
+    height : calc(var(--font-size-time) * 0.3);;
     border-radius : 50%;
     text-align : center;
     vertical-align : middle;
@@ -44,21 +48,43 @@ div{
     justify-content : center;
     z-index : 10;
 }
+.clockContainerIcon{
+    visibility : hidden;
+    margin-left: calc(var(--font-size-time) * 0.1);
+    cursor : pointer;
+    width : calc(var(--font-size-time) * 0.3);
+    height : calc(var(--font-size-time) * 0.3);
+    border-radius : 50%;
+    text-align : center;
+    vertical-align : middle;
+    position: relative;
 
-.clock:hover .containerIcon,
+    display : none;
+    align-items : center;
+    justify-content : center;
+    z-index : 10;
+}
+.showingClockContainerIcon{
+    display : flex;
+}
+
+.clock:hover .clockContainerIcon,
 .containerGreetings:hover .containerIcon{
     visibility : visible;
 }
 
-.containerIcon:hover{
+.containerIcon:hover,
+.clockContainerIcon:hover{
     background-color : var(--color-settingIcon);    
 }
 .settingsIcon{
     color : white;
+    display : none;
 }
   
   /* Tooltip text */
-.containerIcon .settings {
+.containerIcon .settings,
+.clockContainerIcon .settings {
     visibility: hidden;
     width: 150px;
     background-color: var(--color-tooltip-background);
@@ -81,7 +107,8 @@ div{
 
   
   /* Tooltip arrow */
-.containerIcon .settings::after {
+.containerIcon .settings::after,
+.clockContainerIcon .settings:after {
     content: "";
     position: absolute;
     bottom: 100%;
@@ -120,6 +147,7 @@ div{
     display: flex;
     flex-direction: column;
     align-items : center;
+    margin-left: calc(var(--font-size-time) * 0.05);
     /*
     margin-top : calc(50vh - var(--font-size-time));
     */
@@ -127,13 +155,16 @@ div{
 
 /***************** CLOCK : DATE ******************/
 .js-date{
+    display : none;
     color: var(--font-color);
-    font-size: calc(var(--font-size-weather) * 2);
+    font-size: calc(var(--font-size-time) * 0.2);
     text-align: center;
        
     visibility: hidden;
     opacity: 0;    
+    /*
     margin-left : 2vw;
+    */
     
     transition: opacity 1s;
 }
@@ -149,9 +180,12 @@ div{
 .clock{
     display : flex;
     align-items : center; 
+    /*
     margin-left : 45px;
+    */
 }
-.clock .time{
+.clock .time,
+.clock .stopwatch{
     font-weight: bold;
     color : var(--font-color);
     font-size : var(--font-size-time);
@@ -159,6 +193,9 @@ div{
     transition: color .5s ease-in-out;
     line-height: calc(var(--font-size-time)*0.68);
     height: calc(var(--font-size-time)*0.8);
+}
+.clock .stopwatch{
+    margin-right : calc(var(--font-size-time) * 0.4);
 }
 .clock .time input{
     margin-right: 10px;
@@ -172,7 +209,7 @@ div{
 .clock .settingsIcon .settings input{
     margin : 0 10px;
 }
-.clock .containerIcon .settings{
+.clock .clockContainerIcon .settings{
     width: 160px;
 }
 
@@ -267,20 +304,38 @@ div{
 .stopwatch{
     display :none;
 }
-.showingClock{
-    display : block;
+
+/************** TIMER ICONS *************/
+.timerIcons{
+    display:none;
 }
-.showingStopwatch{
-    display : block;
+.timerIcons{
+    color : white;
+    font-size : calc(var(--font-size-time) * 0.3);
+    margin-right : calc(var(--font-size-time) * 0.05);
+    margin-top : calc(var(--font-size-time) * -1 * 0.15);
+    z-index : 5;
+}
+.oneIcon,
+.twoIcons{
+    display :none;
 }
 
+.js-play,
+.js-pause,
+.js-stop{
+    cursor: pointer;
+}
 
 /* ******************* NAME ********************/
 .containerGreetings{
     display : flex;
     align-items : center;
     margin-top : 25px;
+    margin-left : calc(var(--font-size-time) * 0.4);
+    /*
     margin-left: 45px;
+    */
 }
 .containerGreetings .greetings,
 .containerGreetings .yourName,
@@ -290,16 +345,19 @@ div{
 }
 .containerGreetings .greetings,
 .containerGreetings .wiseQuote{
+    /*
     margin-left : 45px;
+    */
 }
 /*
 .containerGreetings .wiseQuote{
     width : 40vw;
 }
-*/
+
 .containerGreetings .containerIcon{
     margin-left: 15px;
 }
+*/
 .containerGreetings .settings{
     display : flex;
     flex-direction : column;
@@ -386,7 +444,9 @@ input[type=text]:focus{
 /* ******************* Form ********************/
 .js-toDoForm{
     margin-top : 40px;
+    /*
     margin-left : 45px;
+    */
 }
 
 

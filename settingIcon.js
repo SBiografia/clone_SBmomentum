@@ -1,7 +1,13 @@
+/*
 const settingIcon = document.querySelectorAll(".containerIcon");
 const clockSetting = settingIcon[0].querySelector(".settings");
 const greetingsSetting = settingIcon[1].querySelector(".settings");
+*/
 
+const clockSettingContainer = document.querySelector(".clockContainerIcon"),
+    clockSetting = clockSettingContainer.querySelector(".settings");
+const grettingSettingContainer = document.querySelector(".containerIcon"),
+    greetingsSetting = grettingSettingContainer.querySelector(".settings");
 
 function showIcon(element){
     //console.log("HI, you click setting Icon");
@@ -33,8 +39,8 @@ function init(){
     //console.log(settingIcon);
     //console.log(settingIcon[0].parentNode.className ==="clock");
     
-    settingIcon[0].addEventListener("click",showIcon);
-    settingIcon[1].addEventListener("click",showIcon);
+    clockSettingContainer.addEventListener("click",showIcon);
+    grettingSettingContainer.addEventListener("click",showIcon);
 
     window.addEventListener("click",notShowIcon);
 }
