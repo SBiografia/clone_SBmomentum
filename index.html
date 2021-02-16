@@ -12,6 +12,15 @@
 
 <body>
   <!-- <div class="centerTest"></div> -->
+  
+  <div class="manualContainer">
+    <i class="far fa-question-circle">
+      <div id="manual">
+        <!--설명서 만들어 넣기-->
+      </div>
+    </i>
+  </div>
+
   <div class="wrapMain">
     <!-- CLOCK -->
     <!--
@@ -43,7 +52,9 @@
         </i>
         <div class="timeOrstopwatch">
           <div class="time">00:00</div>
-          <div class="stopwatch">01:00</div>
+          <div class="stopwatch">
+            <span class="timerMinutes">01</span><span>:</span><span class="timerSeconds">00</span>
+          </div>
         </div>
         <div class="clockContainerIcon">
           <i class="settingsIcon fas fa-ellipsis-h">
@@ -187,9 +198,10 @@
   </div>
 
   <script src="settingIcon.js"></script>
+  <script src="gretting.js"></script>
   <script src="clock.js"></script>
   
-  <script src="gretting.js"></script>
+  
   <script src="bg.js"></script>
   <script src="weather.js"></script>
   
