@@ -409,7 +409,7 @@ div{
     font-size: calc(var(--font-size-greeting) * 0.5);
 }
 
-/* ******************* Form_Greeting, todo ********************/
+/* ******************* Form_Greeting,  ********************/
 .js-toDoForm input[type=text] {
     font-size: var(--font-size-askToDo);
 }
@@ -482,35 +482,74 @@ input[type=text]:focus{
     flex-direction: row;
     justify-content : center;
     align-items : center;
-    height : 2vh;
+    
 
 }
-.containerToDoList .top .fa-calendar-alt{
+
+.containerToDoList .top .topCalendarWrap{
     position: absolute;
     left : 0;
+    transition : transform 0.5s cubic-bezier(0.645, -0.600, 0.460, 1.600);
+    top : -0.2vh;
 }
+.containerToDoList .top .topCalendarWrap:hover{
+    transform : scale(1.5);
+}
+
+.containerToDoList .top .topCalendar{
+    display: inline-block;
+  position: relative;
+}
+.containerToDoList .top .topCalendar input[type=date]{
+    position: absolute;
+    opacity: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+    overflow: hidden;
+    visibility: visible;
+    cursor: pointer;
+
+}
+
+.containerToDoList .top .topCalendar input[type=date]::-webkit-calendar-picker-indicator{
+    position: absolute;
+    top: 0%;
+    left: -150%;
+    width: 300%;
+    height: 300%;
+    cursor: pointer;
+}
+
 .containerToDoList .top .fa-calendar-day{
     position: absolute;
     right : 0;
+    
+    cursor: pointer;
+    transition : transform 0.5s cubic-bezier(0.645, -0.600, 0.460, 1.600);
+}
+.containerToDoList .top .fa-calendar-day:hover{
+    transform : scale(1.5);
 }
 
 .containerToDoList .slideDate #btn_pre,
 .containerToDoList .slideDate #btn_next{
     border : 1px solid gray;
     border-radius : 50%;
-    font-size: calc(var(--font-size-askToDo) * 0.6);
+    font-size: calc(var(--font-size-askToDo) * 0.7);
     line-height: 2vh;
     text-align : center;
-    height : 2vh;
-    width : 2vh;
+    height : 2.7vh;
+    width : 2.7vh;
     cursor : pointer;
     background-color : rgba(255,255,255,1.0);
-    
+    padding : 0;
 }
 .containerToDoList .slideDate .selectDate{
-    font-size: calc(var(--font-size-askToDo) * 0.6);
+    font-size: calc(var(--font-size-askToDo) * 0.9);
     margin-left: 12px;
     margin-right: 12px;
+    margin-bottom : 0.4vh;
     
 }
 
@@ -685,15 +724,32 @@ input[type=text]:focus{
     justify-content : space-between;
     height : 3vh;
 }
-.containerToDoList input[type=text] {
+.js-toDoForm2 input[type=date]{
+    text-align : right;
+    position : relative;
+}
+.js-toDoForm2 input[type=date]::-webkit-calendar-picker-indicator {
+    
+    position: absolute;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  color: transparent;
+  background: transparent;
+}
+
+
+.js-toDoForm2 input[type=text] {
     font-size: calc(var(--font-size-askToDo) * 0.7);
     width : 98%;
 }
-.containerToDoList input[type=date] {
+.js-toDoForm2 input[type=date] {
     visibility: hidden;
     display : none;
-    font-size: calc(var(--font-size-askToDo) * 0.5);
-    width : 28%;
+    font-size: calc(var(--font-size-askToDo) * 0.6);
+    width : 23%;
 
     background-color: transparent;
     border : none;
@@ -702,7 +758,7 @@ input[type=text]:focus{
     border-bottom : 2px solid white;
     
 }
-.containerToDoList input[type=date]:focus{
+.js-toDoForm2 input[type=date]:focus{
     box-shadow: none;
     outline : none;
 }

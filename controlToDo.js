@@ -19,7 +19,7 @@ function hadleTargetDate(){
     else{
         todoTargetDate2.style.visibility = "visible";
         todoTargetDate2.style.display = "block";
-        toDoInput2.style.width = "70%";
+        toDoInput2.style.width = "74%";
     }
 }
 

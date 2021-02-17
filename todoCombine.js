@@ -13,7 +13,7 @@ const progressCurrent = document.querySelector(".progressPercentCurrent");
 
 const topOfToDo = document.querySelector(".containerToDoList .top");
 
-const icon_calendar = topOfToDo.querySelector(".fa-calendar-alt"),
+const icon_calendar = topOfToDo.querySelector(".topCalendar input"),
     btn_pre = topOfToDo.querySelector("#btn_pre"),
     btn_next = topOfToDo.querySelector("#btn_next"),
     selDate = topOfToDo.querySelector(".selectDate"),
@@ -476,7 +476,9 @@ function AllCompleted() {
 
 /******************* 날짜와 연관된 함수들***************** */
 function showCalendar() {
-
+    const tCalendar = icon_calendar.value;
+    tempSelDate.setFullYear(Number(tCalendar.substring(0,4)),Number(tCalendar.substring(5,7))-1,Number(tCalendar.substring(8,10)));
+    showDate(tempSelDate.getMonth(),tempSelDate.getDate());
 }
 function getPreDate() {
     tempSelDate.setDate(tempSelDate.getDate() - 1);
@@ -555,7 +557,7 @@ function init() {
 
     //날짜와 연계된 기능들
     showToday();
-    icon_calendar.addEventListener("click", showCalendar);
+    icon_calendar.addEventListener("change", showCalendar);
     btn_pre.addEventListener("click", getPreDate);
     btn_next.addEventListener("click", getNextDate);
     icon_today.addEventListener("click", showToday);
