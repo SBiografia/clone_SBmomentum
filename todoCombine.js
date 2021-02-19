@@ -24,6 +24,8 @@ const btn_deleteAll = document.querySelector("#deleteAll"),
     btn_deleteDone = document.querySelector("#deleteDone"),
     btn_allCompleted = document.querySelector("#allCompleted");
 
+const btn_saveToDo = document.querySelector(".js-save");
+
 const TODOS_LS = "toDoList";
 const DONE_LS = "doneList";
 const TODOS_CN = "js-toDoList";
@@ -63,13 +65,13 @@ function saveTargetDate(event) {
 
     const parsedToDos = JSON.parse(localStorage.getItem((TODOS_LS)));
 
-    console.log(`month is ${changedMonth}, date is ${changedDate}`);
-    console.log(event.target.parentNode.parentNode.id);
+    //console.log(`month is ${changedMonth}, date is ${changedDate}`);
+    //console.log(event.target.parentNode.parentNode.id);
 
     for (let i = 0; i < parsedToDos.length; i++) {
-        console.log(parsedToDos[i].id, parentLi.id);
+        //console.log(parsedToDos[i].id, parentLi.id);
         if (parsedToDos[i].id === parentLi.id) {
-            console.log("enter same id");
+            //console.log("enter same id");
             toDoListScreen.removeChild(parentLi);
             parsedToDos[i].targetMonth = Number(changedMonth - 1);
             parsedToDos[i].targetDate = Number(changedDate);
@@ -245,34 +247,6 @@ function saveToDoContent(targetSpan){
     }
 }
 
-    /*
-const parentLi = event.target.parentNode.parentNode;
-
-    const parsedToDos = JSON.parse(localStorage.getItem((TODOS_LS)));
-
-    console.log(`month is ${changedMonth}, date is ${changedDate}`);
-    console.log(event.target.parentNode.parentNode.id);
-
-    for (let i = 0; i < parsedToDos.length; i++) {
-        console.log(parsedToDos[i].id, parentLi.id);
-        if (parsedToDos[i].id === parentLi.id) {
-            console.log("enter same id");
-            toDoListScreen.removeChild(parentLi);
-            parsedToDos[i].targetMonth = Number(changedMonth - 1);
-            parsedToDos[i].targetDate = Number(changedDate);
-
-            tempToDoArr = parsedToDos;
-            saveToDo_LS(TODOS_CN);
-            if (checkOverdue(parsedToDos[i])) {
-                printToDo(parsedToDos[i], TODOS_CN, 4);
-            }
-            else if (!checkOverdue(parsedToDos[i])) {
-                printToDo(parsedToDos[i], TODOS_CN, 5);
-            }
-            return;
-        }
-    }
-    */
 
 
 /***********************DELETE  와 관련된 함수들************** */
@@ -537,6 +511,28 @@ function paintToDoDependDate() {
     }
 }
 
+function saveToDo() {
+    var csv = 'Status,To Do, Deadline\n';
+    tempToDoArr.forEach(function (eachToDo) {
+        csv += "TODO,";
+        csv += `${eachToDo.text},`;
+        csv += `${eachToDo.targetMonth + 1}/${eachToDo.targetDate},`
+        csv += "\n";
+    });
+    tempDoneArr.forEach(function (eachToDo) {
+        csv += "DONE,";
+        csv += `${eachToDo.text},`;
+        csv += `${eachToDo.targetMonth + 1}/${eachToDo.targetDate},`
+        csv += "\n";
+    });
+
+    //console.log(csv);
+    var hiddenElement = document.createElement('a');
+    hiddenElement.href = 'data:text/csv;charset=utf-8,' + encodeURI(csv);
+    hiddenElement.target = '_blank';
+    hiddenElement.download = 'SB_Momentum_ToDo.csv';
+    hiddenElement.click();
+}
 
 
 
@@ -561,6 +557,10 @@ function init() {
     btn_pre.addEventListener("click", getPreDate);
     btn_next.addEventListener("click", getNextDate);
     icon_today.addEventListener("click", showToday);
+
+    //SAVE
+    btn_saveToDo.addEventListener("click",saveToDo);
+
 }
 
 init();

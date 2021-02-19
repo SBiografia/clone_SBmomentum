@@ -26,7 +26,7 @@ function init(){
     //console.log(window.screen.width, window.screen.height);
     const screenWidth = window.screen.width;
     const screenHeight = window.screen.height;
-    console.log(screenWidth, screenHeight);
+    //console.log(screenWidth, screenHeight);
     //${screenWidth}x${screenHeight}
     body.style.backgroundImage = `url(https://source.unsplash.com/1600x900/?nature,landscape)`;
     

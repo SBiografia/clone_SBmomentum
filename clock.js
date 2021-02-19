@@ -248,7 +248,6 @@ function checkLimitSecond(num) {
     else if (num === 0) {
         secondsTennthDigit = 0;
     }
-
     if (num >= 0 & num < 60) {
         return true;
     }
@@ -291,9 +290,6 @@ function checkSetTime(e) {
             if (secondsTitle.innerText.length === 1) {
                 secondsTitle.innerText = `${secondsTitle.innerText < 10 ? `0${secondsTitle.innerText}` : secondsTitle.innerText}`;
             }
-
-
-
             saveTempTimeForESC = `${minutesTitle.innerText}:${secondsTitle.innerText}`;
             return false;
         case 8:
@@ -319,7 +315,6 @@ function checkSetTime(e) {
                     e.target.innerText = `${nowNum + 1 < 10 ? `0${nowNum + 1}` : nowNum + 1}`;
                 }
             }
-
             break;
         case 40: //아래쪽 방향키는 1씩 감소
             if (tempCN === "timerMinutes") {
@@ -344,48 +339,58 @@ function checkSetTime(e) {
         case 53://5
             e.returnValue = false;
             if (tempCN === "timerSeconds") {
-
                 if (secondsTennthDigit === 0) {
-
-                    secondsTennthDigit++;
-
+                    if(e.key !== "0"){
+                        secondsTennthDigit++;
+                    }
                     //e.target.innerText = `${Number(e.key) < 10 ? `0${Number(e.key)}` : Number(e.key)}`;
                     e.target.innerText = Number(e.key);
                     handleRange(secondsTitle, 1);
                 } else if (secondsTennthDigit === 1) {
-
-
                     if (cursorPosition === 0 & nowNum_str.length === 1) {
-                        secondsTennthDigit++;
+                        console.log("enter 01")
+                        if(e.key !== "0"){
+                            secondsTennthDigit++;
+                        }
                         e.target.innerText = `${e.key}${nowNum}`;
                     } else if (cursorPosition === 1 & nowNum_str.length === 1 & nowNum < 6) {
+                        console.log("enter 02")
                         secondsTennthDigit++;
                         e.target.innerText = `${nowNum}${e.key}`;
 
                     } else if (cursorPosition !== 2 & nowNum_str.length === 2) {
+                        console.log("enter 03")
                         secondsTennthDigit++;
                         e.target.innerText = `${e.key}${nowNum}`;
                     }
                     else if (cursorPosition === 2 & nowNum_str.length === 2 & nowNum < 6) {
+                        console.log("enter 04")
                         secondsTennthDigit++;
                         e.target.innerText = `${nowNum}${e.key}`;
                     }
-
-
+                    else{
+                        e.target.classList.toggle("applyShake");
+                    }
+                    console.log("enter 00")
                     e.target.blur();
                     saveTempTimeForESC = `${minutesTitle.innerText}:${secondsTitle.innerText}`;
                 } else if (secondsTennthDigit === 2) {
+                    e.target.classList.toggle("applyShake");
                     e.target.blur();
                 }
             }
             else if (tempCN === "timerMinutes") {
                 if (minutesTennthDigit === 0) {
-                    minutesTennthDigit++;
+                    if(e.key !== "0"){
+                        minutesTennthDigit++;
+                    }                    
                     e.target.innerText = Number(e.key);
                     handleRange(minutesTitle, 1);
                 } else if (minutesTennthDigit === 1) {
                     if (cursorPosition === 0 & nowNum_str.length === 1) {
-                        minutesTennthDigit++;
+                        if(e.key !== "0"){
+                            minutesTennthDigit++;
+                        }
                         e.target.innerText = `${e.key}${nowNum}`;
                     } else if (cursorPosition === 1 & nowNum_str.length === 1 & nowNum < 6) {
                         minutesTennthDigit++;
@@ -402,6 +407,7 @@ function checkSetTime(e) {
                     e.target.blur();
                     saveTempTimeForESC = `${minutesTitle.innerText}:${secondsTitle.innerText}`;
                 } else if (minutesTennthDigit === 2) {
+                    e.target.classList.toggle("applyShake");
                     e.target.blur();
                 }
             }
@@ -419,13 +425,12 @@ function checkSetTime(e) {
                     saveTempTimeForESC = `${minutesTitle.innerText}:${secondsTitle.innerText}`;
                 } else if (secondsTennthDigit === 1) {
                     if (cursorPosition === 0 & nowNum_str.length === 1) {
-                        
+                        e.target.classList.toggle("applyShake");
                     } else if (cursorPosition === 1 & nowNum_str.length === 1 & nowNum < 6) {
                         secondsTennthDigit++;
                         e.target.innerText = `${nowNum}${e.key}`;
-
                     } else if (cursorPosition !== 2 & nowNum_str.length === 2) {
-                        
+                        e.target.classList.toggle("applyShake");
                     }
                     else if (cursorPosition === 2 & nowNum_str.length === 2 & nowNum < 6) {
                         secondsTennthDigit++;
@@ -437,8 +442,8 @@ function checkSetTime(e) {
                     saveTempTimeForESC = `${minutesTitle.innerText}:${secondsTitle.innerText}`;
 
                 } else if (secondsTennthDigit === 2) {
+                    e.target.classList.toggle("applyShake");
                     e.target.blur();
-
                 }
             }
             else if (tempCN === "timerMinutes") {
@@ -462,16 +467,13 @@ function checkSetTime(e) {
                         minutesTennthDigit++;
                         e.target.innerText = `${nowNum}${e.key}`;
                     }
-
-
                     e.target.blur();
                     saveTempTimeForESC = `${minutesTitle.innerText}:${secondsTitle.innerText}`;
                 } else if (minutesTennthDigit === 2) {
+                    e.target.classList.toggle("applyShake");
                     e.target.blur();
                 }
             }
-
-
             break;
         default:
             e.returnValue = false;
@@ -499,7 +501,7 @@ function setTimerIcons() {
     }
     else if (timerStatus === "stop") {
 
-        console.log("setTimer : stop");
+        //console.log("setTimer : stop");
         askSetTimer();
         oneIcon.classList.add("showing");
         twoIcons.classList.remove("showing");
@@ -535,6 +537,13 @@ function init() {
     playIcon.addEventListener("click", playTimer);
     pauseIcon.addEventListener("click", pauseAndPlayHandler);
     stopIcon.addEventListener("click", stopTimer);
+
+    minutesTitle.addEventListener("animationend", function(e){
+        e.target.classList.toggle("applyShake");
+    });
+    secondsTitle.addEventListener("animationend", function(e){
+        e.target.classList.toggle("applyShake");
+    });
 }
 
 init();

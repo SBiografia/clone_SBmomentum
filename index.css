@@ -217,6 +217,10 @@ body {
 .clock .stopwatch{
     margin-right : calc(var(--font-size-time) * 0.4);
 }
+.clock .stopwatch .timerMinutes,
+.clock .stopwatch .timerSeconds{
+    display : inline-block;
+}
 
 .clock .stopwatch .timerMinutes:focus,
 .clock .stopwatch .timerSeconds:focus,
@@ -909,7 +913,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 /* Daily Weather w.hover */
 #containerWeather .containerDailyWeather{
     visibility : hidden;
-    width: 17vh;
+    width: 19vh;
     border-radius : 20px;
     background-color: var(--color-tooltip-background);
     color : var(--text-color);

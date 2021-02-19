@@ -144,7 +144,7 @@ function init(){
         shortQuote = data.filter(function(qqq){
             return qqq.text.length < 40;
         }); //133개
-        console.log(shortQuote);
+        //console.log(shortQuote);
         
     });
     
