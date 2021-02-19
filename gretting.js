@@ -19,6 +19,7 @@ const quoteList =["Be of good cheer",
         "Hell to be at, Good to be from",
         "From a little spark may burst a flame"
         ];
+let shortQuote = [];
 
 function saveName(text){
     localStorage.setItem(USER_LS, text);
@@ -106,8 +107,11 @@ function showWise(){
         greeting.classList.remove(SHOWING_CN);
         yourName.classList.remove(SHOWING_CN);
         wiseQuote.classList.add(SHOWINGWISE_CN);
-        let ranNum = Math.floor(Math.random() * 5);
-        wiseQuote.innerText = quoteList[ranNum];
+        //const ranNum = Math.floor(Math.random() * 5);
+        //wiseQuote.innerText = quoteList[ranNum];
+        const ranNum = Math.floor(Math.random() * 133);
+        wiseQuote.innerText = shortQuote[ranNum].text;
+        
         btn_wise.innerText = "Show Name";
         console.dir(wiseQuote);
         console.log(wiseQuote.offsetWidth, wiseQuote.offsetHeight, wiseQuote.style.fontSize);
@@ -124,10 +128,26 @@ function showWise(){
 
 }
 
+
 function init(){
     loadName();
     btn_changeName.addEventListener("click",changeName);
     btn_wise.addEventListener("click",showWise);
+
+    //로딩 시간을 줄이려고 여기다가 바로 우선 만들어놓음..
+    fetch("https://type.fit/api/quotes")
+    .then(function(response) {
+      return response.json();
+    })
+    .then(function(data) {
+      //console.log(data);    
+        shortQuote = data.filter(function(qqq){
+            return qqq.text.length < 40;
+        }); //133개
+        console.log(shortQuote);
+        
+    });
+    
 
 }
 
