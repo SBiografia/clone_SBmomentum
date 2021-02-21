@@ -2,7 +2,8 @@
     --font-size-time : 15vh;
     --font-size-greeting : 5vh;
     --font-size-askToDo : 3vh;
-    --font-size-weather : 1.5vh;
+    --font-size-weather : 1.8vh;
+    --font-size-manual : 2vh;
 
     --font-color : white;
     --color-tooltip-background : rgba(11,11,11,0.7);
@@ -25,8 +26,8 @@ div{
     background : rgba(255,0,0,0.5);
     z-index : -1;
     position : absolute;
-    height : 100%;
-    width : 50%;
+    height : 50%;
+    width : 100%;
     left : 0;
     
 }
@@ -43,12 +44,120 @@ body {
 
 /***************** MANUAL ******************/
 .manualContainer{
+    position : absolute;
+    right :0;
+}
+
+.manualContainer .manualIcon{
     position: absolute;
+    top : 1vw;
+    right : 1vw;
+    color: var(--font-color);
+    font-size : var(--font-size-askToDo);
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+    transition : transform 0.5s cubic-bezier(0.645, -0.600, 0.460, 1.600);
+    z-index:99;
+}
+.manualContainer .manualIcon:hover{
+    transform : scale(1.5);
+}
+
+.manual{
+    position: relative;
     width : 100vw;
     height : 100vh;
-    display : hidden;
+    background : rgba(0,0,0,0.6);
+    display : none;
+    color : var(--font-color);
+    font-size: var(--font-size-manual);
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+    z-index : 98;
+}
+.manual div{
+    position : absolute;
+    display : inline-block;
+    background: rgba(0,0,0,0.5);
+    padding : 3px;
+    border-radius: 6px;
+    line-height : calc(var(--font-size-manual) * 0.8);
+    width : max-content;
+    
+}
+.manual .todoIcon{
+    left : 83vw;
+    top : 53vh;
+}
+.manual .todo1{
+    top : 68vh;
+    left : 33vw;
+}
+.manual .name{
+    top : 58vh;
+    left : 50vw;
+}
+.manual .time{
+    top : 45vh;
+    left : 30vw;
+}
+.manual .save{
+    top : 6vh;
+    left : 49vw;
+}
+.manual .weather{
+    top : 6.5vh;
+    left : 2vw;
+}
+.todoPage{
+    opacity :0;
     visibility: hidden;
-    z-index:99;
+    position : relative;
+}
+.todoPage div{
+    position: absolute;
+}
+.calendar{
+    top : 12vh;
+    left : 53vw;
+}
+.manual .selDate{
+    top : 10vh;
+    left : 68vw;
+    line-height : calc(var(--font-size-manual) * 1.2);
+}
+.today{
+    top : 11vh;
+    left : 90vw;
+}
+.todoCalendar{
+    top : 16vh;
+    left : 82vw;
+}
+.manual .todo_manual{
+    top : 30vh;
+    left : 56vw;
+    line-height : calc(var(--font-size-manual) * 1.2);
+}
+.allCopleted_manual{
+    top : 51vh;
+    left : 68vw;
+}
+.manual .completed_manual{
+    top : 70vh;
+    left : 56vw;
+    line-height : calc(var(--font-size-manual) * 1.2);
+}
+.clear_manual{
+    top : 87vh;
+    left : 75vw;
+}
+
+.js-save{
+    position : absolute;
+    color : var(--font-color);
+    font-size: var(--font-size-greeting);
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+    left : 50vw;
+    top : 1vw;
 }
 
 /* setting w.hover */
@@ -99,12 +208,15 @@ body {
 }
 .settingsIcon{
     color : white;
-    display : none;
+    /*display : none;*/
 }
   
   /* Tooltip text */
+/*
 .containerIcon .settings,
 .clockContainerIcon .settings {
+    */
+.settings{
     visibility: hidden;
     width: 150px;
     background-color: var(--color-tooltip-background);
@@ -177,6 +289,7 @@ body {
 .js-date{
     display : none;
     color: var(--font-color);
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
     font-size: calc(var(--font-size-time) * 0.2);
     text-align: center;
        
@@ -209,7 +322,8 @@ body {
     font-weight: bold;
     color : var(--font-color);
     font-size : var(--font-size-time);
-    
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+
     transition: color .5s ease-in-out;
     line-height: calc(var(--font-size-time)*0.68);
     height: calc(var(--font-size-time)*0.8);
@@ -249,8 +363,9 @@ body {
 .wrapClock .clockTypeIcon{
     color : white;
     font-size : calc(var(--font-size-time) * 0.2);
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
 }
-.wrapClock .clockTypeIcon{
+.clockTypeIcon{
     visibility : hidden;
     
     cursor : pointer;
@@ -261,7 +376,7 @@ body {
     vertical-align : middle;
     position: relative;
 
-    display : flex;
+    display : flex !important;
     align-items : center;
     justify-content : center;
     z-index : 10;
@@ -280,7 +395,7 @@ body {
 }
 */
 
-.wrapClock .clockTypeIcon .clockTypeList{
+.clockTypeList{
     visibility :hidden;
     position : absolute;
     width : calc(var(--font-size-time) * 0.7);
@@ -312,6 +427,7 @@ body {
 .wrapClock .clockTypeIcon .clockTypeList .tooltipClockType{
     visibility : hidden;
     font-size : calc(var(--font-size-time) * 0.12);
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
     position : absolute;
     top : 110%;
     background-color : var(--color-tooltip-background);
@@ -344,6 +460,7 @@ body {
 .timerIcons{
     color : white;
     font-size : calc(var(--font-size-time) * 0.3);
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
     margin-right : calc(var(--font-size-time) * 0.05);
     margin-top : calc(var(--font-size-time) * -1 * 0.15);
     z-index : 5;
@@ -374,12 +491,7 @@ body {
 .containerGreetings .wiseQuote{
     color : var(--font-color);
     font-size: var(--font-size-greeting);
-}
-.containerGreetings .greetings,
-.containerGreetings .wiseQuote{
-    /*
-    margin-left : 45px;
-    */
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
 }
 /*
 .containerGreetings .wiseQuote{
@@ -423,17 +535,20 @@ body {
 .showingWise{
     display : block;
     font-size: calc(var(--font-size-greeting) * 0.5);
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
 }
 
 /* ******************* Form_Greeting,  ********************/
 .js-toDoForm input[type=text] {
     font-size: var(--font-size-askToDo);
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
 }
 .js-toDoForm input[type=text]::placeholder{
     text-align: center;
 }
 .js-name input[type=text] {
     font-size: var(--font-size-greeting);
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
     margin-top : 20px;
 }
 input[type=text]{
@@ -553,6 +668,7 @@ input[type=text]:focus{
     border : 1px solid gray;
     border-radius : 50%;
     font-size: calc(var(--font-size-askToDo) * 0.7);
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
     line-height: 2vh;
     text-align : center;
     height : 2.7vh;
@@ -563,6 +679,7 @@ input[type=text]:focus{
 }
 .containerToDoList .slideDate .selectDate{
     font-size: calc(var(--font-size-askToDo) * 0.9);
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
     margin-left: 12px;
     margin-right: 12px;
     margin-bottom : 0.4vh;
@@ -582,6 +699,7 @@ input[type=text]:focus{
 .containerToDoList .title .numOfToDo,
 .containerToDoList .title .numOfDone{
     font-size : calc(var(--font-size-askToDo) * 0.6);
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
     position : absolute;
     right : 0;
     margin-right : 20px;
@@ -625,6 +743,7 @@ input[type=text]:focus{
     margin-left : auto;
     margin-right : 15px;
     font-size: calc(var(--font-size-askToDo) * 0.5);
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
     align-self : center;
     z-index:3;
 }
@@ -724,6 +843,7 @@ input[type=text]:focus{
     
     background-color : rgba(0,0,0,0.7);
     font-size: calc(var(--font-size-askToDo) * 0.7);
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
     color : var(--font-color);
     display : flex;
     flex-direction: column;    
@@ -760,12 +880,14 @@ input[type=text]:focus{
 
 .js-toDoForm2 input[type=text] {
     font-size: calc(var(--font-size-askToDo) * 0.7);
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
     width : 98%;
 }
 .js-toDoForm2 input[type=date] {
     visibility: hidden;
     display : none;
     font-size: calc(var(--font-size-askToDo) * 0.6);
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
     width : 23%;
 
     background-color: transparent;
@@ -799,6 +921,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     width : 100%;
     align-self: flex-end;
     font-size: calc(var(--font-size-askToDo) * 0.5);
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
     display : flex;
     justify-content : flex-end;
     height : 2.5vh
@@ -808,6 +931,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     width : 100%;
     align-self: flex-end;
     font-size: calc(var(--font-size-askToDo) * 0.5);
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
     display : flex;
     justify-content: space-between;
     align-items: center;
@@ -842,6 +966,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 .containerToDoList button{
     width : 13vh;
     font-size: calc(var(--font-size-askToDo) * 0.5);
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
     
     border : none;
     border-radius : 15px;
@@ -859,13 +984,14 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 .toDoListIcon{
     color : var(--font-color);
     font-size : var(--font-size-greeting);
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
     position : absolute;
     right : 1vw;
-    Top : 50%;
+    Top : 49.5vh;
     transform :translateY(-50%);
     opacity : 1;
     transition: opacity 1s;
-
+    z-index: 99;
 }
 .toDoListIcon :hover{
     box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
@@ -897,6 +1023,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     left : 20px;
     color : var(--font-color);
     font-size: var(--font-size-weather);
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
 
 }
 
@@ -908,6 +1035,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 }
 #containerWeather li{
     font-size : calc(var(--font-size-weather) * 0.8);
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
 }
 
 /* Daily Weather w.hover */
@@ -969,3 +1097,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     animation: fadeIn 1s linear;
 }
 
+.manalshowing{
+    visibility: visible;
+    opacity: 1;
+}

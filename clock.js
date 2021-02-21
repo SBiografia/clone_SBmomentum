@@ -60,15 +60,15 @@ function getTime() {
 
 function showTypeList(e) {
     //console.log("enter show type list");
-    clockTypeList.style.visibility = "visible";
-    clockTypeList.style.opacity = 1;
+    //clockTypeList.style.visibility = "visible";
+    //clockTypeList.style.opacity = 1;
+    clockTypeList.classList.toggle("manalshowing");
     e.stopPropagation();
 }
 function notShowTypeList() {
-    if (clockTypeList.style.visibility === "visible") {
-        clockTypeList.style.visibility = "hidden";
-        clockTypeList.style.opacity = 0;
-    }
+    //if (clockTypeList.style.visibility === "visible") {
+        clockTypeList.classList.remove("manalshowing");
+    //}
 }
 function toggleType() {
     clockIcon.classList.toggle("selectClockType");

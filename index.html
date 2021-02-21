@@ -10,28 +10,67 @@
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300&display=swap" rel="stylesheet">
 </head>
 
-<body>
-  <!-- <div class="centerTest"></div> -->
+<body><!-- <div class="centerTest"></div> -->
 
-  <div class="manualContainer">
-    <i class="far fa-question-circle">
-      <div id="manual">
-        <!--설명서 만들어 넣기-->
+<div class="manualContainer">
+  <i class="far fa-question-circle manualIcon"></i>
+  <div class="toDoListIcon">
+    <i class="fas fa-clipboard-list"></i>
+  </div>
+  <div class="manual">
+    <div class="saveContainer">
+      <i class="fas fa-file-download js-save"></i>
+    </div>
+
+    <!--설명서 만들어 넣기-->
+    <div class="mainPage">
+      <div class="weather">
+        mouse on : see after 7 days weather
       </div>
-    </i>
+      <div class="save">
+        click : download todo list
+      </div>
+      <div class="time">
+        mouse on : show Icon and today's date
+      </div>
+      <div class="name">
+        mouse on : show Icon
+      </div>
+      <div class="todo1">
+        input today's todo
+      </div>
+      <div class="todoIcon">
+        click : show todo list
+      </div>
+    </div>
+    <div class="todoPage">
+      <div class="calendar">select date</div>
+      <div class="selDate">change date +/- 1<br>set todo's deadline</div>
+      <div class="today">select today</div>
+      <div class="todoCalendar">select todo's deadline</div>
+      <div class="todo_manual">
+        click : move to 'Completed'<br>
+        double click : modify todo<br>
+        click 'X' button : delete todo
+      </div>
+      <div class="allCopleted_manual">
+        click : all todo move to 'Completed'
+      </div>
+      <div class="completed_manual">
+        click:move to 'To Do List'<br>
+        click 'X' button : delete todo
+      </div>
+      <div class="clear_manual">
+        click:delete all todo & completed
+      </div>
+      
+    </div>
   </div>
-  <!-- save 아이콘 나중에 다른데로 옮기기...-->
-  <div class="saveContainer">
-    <i class="fas fa-file-download js-save"></i>
-  </div>
+</div>
 
   <div class="wrapMain">
     <!-- CLOCK -->
-    <!--
-    <canvas id="canvas" width="400" height="400"
-    style="background-color:#333">
-    </canvas>
-    -->
+    
     <div class="wrapClock">
       <span class="js-date">ddd</span>
       <div class="timerIcons">
@@ -152,9 +191,7 @@
       </div>
     </div>
 
-    <div class="toDoListIcon">
-      <i class="fas fa-clipboard-list"></i>
-    </div>
+    
 
   </div>
 
@@ -217,6 +254,7 @@
   <script src="todoCombine.js"></script>
   
   <script src="controlToDo.js"></script>
+  <script src="manual.js"></script>
 
   <!-- <script src="stopwatch.js"></script> -->
 

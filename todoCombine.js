@@ -150,6 +150,7 @@ function printToDo(tToDo, tempCN, printType) {
     uncheckBtn.addEventListener("click", uncheckTodo);
     delBtn.addEventListener("click", handleDelete);
     span.addEventListener("dblclick",changeToDoContent)
+    span.addEventListener("click",handleSpanCheck);
     spanTarget.classList.add("target");
     eachToDoTarget.addEventListener("change", saveTargetDate);
     //spanTarget.addEventListener("dblclick", changeTarget);
@@ -334,28 +335,33 @@ function loadToDos() {
     }
 }
 /***********************CHECK UNCHECK Handle  과 관련된 함수들************** */
-
-
-function checkTodo(event) {
-    //toDo -> Done으로 
-    const btn = event.target,
-        li = btn.parentNode;
+function handleSpanCheck(event){
+    
+    console.dir(event.target);
+    console.dir(event.target.parentNode.parentNode.className);
+    console.log(event.target.parentNode.parentNode.className === TODOS_CN);
+    if(event.target.parentNode.parentNode.className === TODOS_CN){
+        realCheckToDo(event.target.parentNode);
+    }else if(event.target.parentNode.parentNode.className === DONE_CN){
+        realUncheckToDo(event.target.parentNode);
+    }
+}
+function realCheckToDo(li){
     deleteToDo(li, TODOS_CN);
-
     const toDoObj = {
         text: li.childNodes[1].innerText,
         id: getNewID(),
         targetMonth: li.targetMonth,
         targetDate: li.targetDate
     };
-
     printToDo(toDoObj, DONE_CN, 3);
 }
+function checkTodo(event) {
+    //toDo -> Done으로 
 
-function uncheckTodo(event) {
-    const btn = event.target,
-        li = btn.parentNode;
-
+    realCheckToDo(event.target.parentNode);
+}
+function realUncheckToDo(li){
     deleteToDo(li, DONE_CN);
 
     const toDoObj = {
@@ -365,6 +371,11 @@ function uncheckTodo(event) {
         targetDate: li.targetDate
     };
     printToDo(toDoObj, TODOS_CN, 3);
+}
+function uncheckTodo(event) {
+
+    realUncheckToDo(event.target.parentNode);
+    
 }
 
 /***********************INPUT SUBMIT  과 관련된 함수들************** */
